@@ -55,6 +55,8 @@ M.toggle_terminal = function()
 	vim.cmd("normal i")
 end
 
+M.setup = function(opts) end
+
 vim.api.nvim_create_user_command("Floaterminal", M.toggle_terminal, {})
 vim.keymap.set({ "n", "t" }, "<leader>tt", M.toggle_terminal)
 

@@ -1,7 +1,5 @@
 local M = {}
 
-vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>:Floaterminal<enter>")
-
 local state = {
 	floating = {
 		buf = -1,
@@ -48,16 +46,19 @@ M.toggle_terminal = function()
 		state.floating = create_floating_window({ buf = state.floating.buf })
 		if vim.bo[state.floating.buf].buftype ~= "terminal" then
 			vim.cmd.terminal()
+			vim.cmd("startinsert")
+		else
+			vim.cmd("startinsert")
 		end
 	else
 		vim.api.nvim_win_hide(state.floating.win)
 	end
-	vim.cmd("normal i")
 end
 
-M.setup = function(opts) end
-
-vim.api.nvim_create_user_command("Floaterminal", M.toggle_terminal, {})
-vim.keymap.set({ "n", "t" }, "<leader>tt", M.toggle_terminal)
+M.setup = function(opts)
+	vim.api.nvim_create_user_command("Floaterminal", M.toggle_terminal, {})
+	vim.keymap.set({ "n", "t" }, "<leader>tt", M.toggle_terminal, { desc = "[T]oggle Floating [T]erminal" })
+	vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>:Floaterminal<CR>")
+end
 
 return M

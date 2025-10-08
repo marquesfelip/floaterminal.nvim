@@ -12,7 +12,7 @@ Um terminal flutuante para Neovim.
 
 ```lua
 {
-  "seu-usuario/floaterminal.nvim",
+  "marquesfelip/floaterminal.nvim",
   config = function()
     require("floaterminal").setup()
   end,
